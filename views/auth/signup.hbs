@@ -1,6 +1,11 @@
 <div>
-  <h2>Log In</h2>
-  <form action="/auth/login" method="POST">
+  <h2>Signup</h2>
+  <form action="/auth/signup" method="POST">
+    <div>
+      <label>Email
+        <input type="text" name="email" placeholder="john.doe@gmail.com" />
+      </label>
+    </div>
     <div>
       <label>Username
         <input type="text" name="username" placeholder="ironhacker" />
@@ -13,7 +18,7 @@
       </label>
     </div>
     <br />
-    <div><button class="submitbuttons" type="submit">Log In</button></div>
+    <button class="submitbuttons" type="submit">Create account</button>
   </form>
   <div class="validationErrors">
     {{#if errorMessage}}

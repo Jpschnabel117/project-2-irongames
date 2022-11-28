@@ -15,11 +15,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// const indexRouter = require("./routes/index");
-// app.use("/", indexRouter);
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
 
-// const authRouter = require("./routes/auth.route");
-// app.use("/auth", authRouter);
+const authRouter = require("./routes/auth.route");
+app.use("/auth", authRouter);
+
+const toolsRouter = require("./routes/tools.route");
+app.use("/tools", toolsRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -30,5 +33,4 @@ mongoose
 
 require("./error-handling")(app);
 
-
-module.exports = app
+module.exports = app;

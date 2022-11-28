@@ -4,14 +4,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/index.css" />
   </head>
   <body>
     <nav>
-        {{#if admin}}
-
-        {{/if}}
+      <div>
+        <a href="/">IronGames | </a>
+      </div>
+      <div>
+        filter |
+      </div>
+      <div>
+        sort by |
+      </div>
+      {{#if userInSession.admin}}
+        <div>
+          <a href="/tools/admin-tools"> admin tools | </a>
+        </div>
+        <div>
+          <a href="/auth/userProfile">Profile | </a>
+        </div>
+        <div>
+          <form class="logout-form" action="/auth/logout" method="POST">
+            <button>Logout</button>
+          </form>
+        </div>
+      {{else if userInSession}}
+        <div>
+          <a href="/tools/creator-tools"> creator tools | </a>
+        </div>
+        <div>
+          <a href="/auth/userProfile">Profile | </a>
+        </div>
+        <div>
+          <form class="logout-form" action="/auth/logout" method="POST">
+            <button>Logout</button>
+          </form>
+        </div>
+      {{else}}
+        <div>
+          <a href="/auth/signup">Sign Up | </a>
+        </div>
+        <div>
+          <a href="/auth/login">Log In | </a>
+        </div>
+      {{/if}}
     </nav>
     {{{body}}}
-    <script src="/javascripts/auth-scripts.js"></script>
+    <div id="homeGameList">
+      {{!-- {{#each myRooms}}
+          <div class="listedRoom">
+            <div>
+              <h3>{{name}}</h3>
+              <p>{{owner}}</p>
+              <p>{{description}}</p>
+              <img src="{{imageUrl}}" alt="" />
+              {{#each reviews}}
+                review
+                <h4>{{user.username}}</h4>
+                <p>{{comment}}</p>
+              {{/each}}
+            </div>
+            <div>
+              {{#if isMyRoom}}
+                <form action="/rooms/{{name}}/delete" method="post">
+                  <button type="submit"> delete</button>
+
+                </form>
+                <form action="/rooms/{{name}}/editroom" method="get">
+                  <button type="submit"> edit</button>
+                </form>
+              {{else}}
+                <form action="/review/add-review/{{name}}">
+                  <button>Add Review</button>
+                </form>
+              {{/if}}
+
+            </div>
+          </div>
+        {{/each}} --}}
+    </div>
+    <script src="/javascripts/main.js"></script>
   </body>
 </html>
