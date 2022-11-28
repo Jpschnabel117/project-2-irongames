@@ -14,6 +14,7 @@ const userSchema = new Schema(
       match: [/^[a-zA-Z0-9]+$/, "please use a valid username"],
       trim: true,
     },
+    ownedGames: [],
     approvedGames: [],
     pendingGames: [],
     favorites: [],

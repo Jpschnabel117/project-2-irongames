@@ -6,12 +6,45 @@
     </div>
     <div class="tools-gamelistbox">
       <div class="tools-gamelist">
-        games
+        <div class="pending-games">
+        </div>
+        <div class="posted-games">
+          {{#each myGames}}
+            <div class="listedGame">
+              <div>
+                <h3>{{title}}</h3>
+                <p>{{owner.username}}</p>
+                <p>{{description}}</p>
+                {{!-- <img src="{{imageUrl}}" alt="" /> --}}
+                <a target="_blank" href="{{gitPage}}"> Gamelink</a>
+                <br />
+                <a target="_blank" href="{{gitRep   }}"> rep link</a>
+              </div>
+              <div>
+                {{#if isMyGame}}
+                  {{!-- <form action="/rooms/{{name}}/delete" method="post">
+                    <button type="submit"> delete</button>
+
+                  </form>
+                  <form action="/rooms/{{name}}/editroom" method="get">
+                    <button type="submit"> edit</button>
+                  </form> --}}
+                {{else}}
+                  {{!-- <form action="/review/add-review/{{name}}">
+                    <button>Add Review</button>
+                  </form> --}}
+                {{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>
   <div class="tools-rightbox">
-    <div>game info</div>
+    <div>
+      <button class="editcreatebtn">edit</button>
+    </div>
     <div>
       <h2>create game</h2>
       <form action="/game/creategame" method="POST">
@@ -77,3 +110,4 @@
     </div>
   </div>
 </div>
+<script src="/javascripts/tools/creator-tools.js"></script>

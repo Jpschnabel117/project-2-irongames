@@ -68,3 +68,15 @@ nav {
 .tools-order > div {
   background-color: white;
 }
+
+.posted-games {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+}
+
+.listedGame {
+  background-color: #00b7ff;
+  border-radius: 5px;
+  width: 95%;
+}

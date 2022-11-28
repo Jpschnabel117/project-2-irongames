@@ -45,6 +45,8 @@ router.post("/creategame", isLoggedIn, (req, res, next) => {
     .then((createdGame) => {
       console.log("created game: ", createdGame);
       req.session.currentGame = createdGame;
+      req.session.currentUser.ownedGames.push(createdGame);
+      req.session.currentUser.pendingGames.push(createdGame);
       if (req.session.currentUser.admin) {
         res.redirect("/tools/admin-tools");
       } else {
