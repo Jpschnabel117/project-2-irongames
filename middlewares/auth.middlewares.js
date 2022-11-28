@@ -14,41 +14,50 @@ const isAnon = (req, res, next) => {
   next();
 };
 
-// const Room = require("../models/room.model");
-// //isowner middleware
-// const isOwner = (req, res, next) => {
-//   Room.findById(req.params.id)
-//     .then((foundRoom) => {
-//       if (String(foundRoom.owner) === req.session.user._id) {
-//         next();
-//       } else {
-//         //pop up model
-//         res.redirect("/rooms/rooms-list");
-//       }
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+const isAdmin = (req, res, next) => {
+  if (req.session.currentUser.admin) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
-// const isNotOwner = (req, res, next) => {
-//   Room.findById(req.params.id)
-//     .then((foundRoom) => {
-//       if (String(foundRoom.owner) !== req.session.user._id) {
-//         next();
-//       } else {
-//         //pop up model
-//         res.redirect("/rooms/rooms-list");
-//       }
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+const Game = require("../models/game.model");
+//isowner middleware
+const isOwner = (req, res, next) => {
+  Game.findById(req.params.id)
+    .then((foundGame) => {
+      if (String(foundGame.owner) === req.session.user._id) {
+        next();
+      } else {
+        //pop up model
+        res.redirect("/");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const isNotOwner = (req, res, next) => {
+  Game.findById(req.params.id)
+    .then((foundGame) => {
+      if (String(foundGame.owner) !== req.session.user._id) {
+        next();
+      } else {
+        //pop up model
+        res.redirect("/");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 module.exports = {
-  //isNotOwner,
-  //isOwner,
+  isAdmin,
+  isNotOwner,
+  isOwner,
   isLoggedIn,
   isAnon,
 };

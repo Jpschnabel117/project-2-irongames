@@ -12,11 +12,12 @@ const gameSchema = new Schema({
   techDescription: String,
   plays: Number,
   datePublised: Date,
+  pending: Boolean,
   imageUrl: { type: String },
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }], // we will update this field a bit later when we create review model
 });
 
-const Game = model("Game", roomSchema);
+const Game = model("Game", gameSchema);
 
 module.exports = Game;

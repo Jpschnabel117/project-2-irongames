@@ -3,7 +3,7 @@ const router = require("express").Router();
 const bcryptjs = require("bcryptjs");
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
-const { isAnon, isLoggedIn } = require("../middlewares/auth.middlewares");
+const { isAnon, isLoggedIn, isNotOwner,isOwner } = require("../middlewares/auth.middlewares");
 const saltRounds = 8;
 
 router.get("/signup", isAnon, (req, res, next) => {

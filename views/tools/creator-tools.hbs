@@ -9,9 +9,71 @@
         games
       </div>
     </div>
-
   </div>
   <div class="tools-rightbox">
     <div>game info</div>
+    <div>
+      <h2>create game</h2>
+      <form action="/game/creategame" method="POST">
+        <div>
+          <label>Title
+            <input type="text" name="title" placeholder="ironGame" />
+          </label>
+        </div>
+        <div>
+          <label>
+            gitPage link
+            <input
+              type="url"
+              name="gitPage"
+              placeholder="https://jpschnabel117.github.io/Game-Project-DDR/"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            gitRep link
+            <input
+              type="url"
+              name="gitRep"
+              placeholder="https://github.com/Jpschnabel117/Game-Project-DDR"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            description
+            <input
+              type="text"
+              name="description"
+              placeholder="game about jumping"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            tech description
+            <input
+              type="text"
+              name="techDescription"
+              placeholder="i used Javascript canvas"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            image!
+            <input type="url" name="imageUrl" placeholder="not working yet" />
+          </label>
+        </div>
+        <br />
+        <div><button class="submitbuttons" type="submit">Submit Game</button></div>
+      </form>
+      <div class="validationErrors">
+        {{#if errorMessage}}
+          <p class="error">{{errorMessage}}</p>
+        {{/if}}
+      </div>
+    </div>
   </div>
 </div>

@@ -24,6 +24,9 @@ app.use("/auth", authRouter);
 const toolsRouter = require("./routes/tools.route");
 app.use("/tools", toolsRouter);
 
+const gameRouter = require("./routes/games.route");
+app.use("/game", gameRouter);
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then((x) =>

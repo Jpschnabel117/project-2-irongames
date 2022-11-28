@@ -1,1 +1,33 @@
-index
+<div id="listofgames">
+  {{#each myRooms}}
+    <div class="listedgame">
+      <div>
+        <h3>{{name}}</h3>
+        <p>{{owner}}</p>
+        <p>{{description}}</p>
+        {{!-- <img src="{{imageUrl}}" alt="" /> --}}
+        {{#each reviews}}
+          review
+          <h4>{{user.username}}</h4>
+          <p>{{comment}}</p>
+        {{/each}}
+      </div>
+      <div>
+        {{#if isMyRoom}}
+          <form action="/rooms/{{name}}/delete" method="post">
+            <button type="submit"> delete</button>
+
+          </form>
+          <form action="/rooms/{{name}}/editroom" method="get">
+            <button type="submit"> edit</button>
+          </form>
+        {{else}}
+          <form action="/review/add-review/{{name}}">
+            <button>Add Review</button>
+          </form>
+        {{/if}}
+
+      </div>
+    </div>
+  {{/each}}
+</div>
