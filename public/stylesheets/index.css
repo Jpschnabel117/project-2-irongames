@@ -118,3 +118,7 @@ nav {
 .editdeletebtn {
   display: flex;
 }
+
+.gameImg {
+  width: 100px;
+}
