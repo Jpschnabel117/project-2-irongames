@@ -1,3 +1,17 @@
 <div id="listofgames">
-
+  {{#each allGames}}
+    {{#if pending}}{{else}}
+      <div class="mainlistedGame">
+        <h3>title: {{title}}</h3>
+        <p>Creator: {{owner.username}}</p>
+        <p>Description: {{description}}</p>
+        {{!-- <img src="{{imageUrl}}" alt="" /> --}}
+        <a target="_blank" href="{{gitPage}}"> Gamelink</a>
+        <br />
+        <a target="_blank" href="{{gitRep}}"> rep link</a>
+        <br />
+        <span>Status: [Approved]</span>
+      </div>
+    {{/if}}
+  {{/each}}
 </div>

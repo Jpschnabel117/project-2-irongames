@@ -108,11 +108,49 @@ router.post("/creategame", isLoggedIn, (req, res, next) => {
     });
 });
 
+router.get("/:title/editgame", (req, res, next) => {
+  Game.find({ title: req.params.title })
+    .then((foundGame) => {
+      console.log(foundGame, "FOUND GAME");
+      res.render("game/game-edit", foundGame[0]);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.post("/:title/editgame", (req, res, next) => {
+  Game.findOneAndUpdate(
+    { title: req.params.title },
+    req.body /*the form stuff*/,
+    { new: true }
+  )
+    .then((foundGame) => {
+      console.log(foundGame, "updated Game");
+      //add redirect for admin tools with admin check
+      res.redirect("/tools/creator-tools");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 router.post("/:id/delete", (req, res, next) => {
   console.log(req.params.id, "PARAMS NAME");
   Game.findByIdAndDelete(req.params.id)
     .then((foundGame) => {
       res.redirect("/tools/creator-tools");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.post("/:id/approvegame", (req, res, next) => {
+  console.log(req.params.id, "PARAMS NAME");
+  Game.findByIdAndUpdate(req.params.id, { pending: false })
+    .then((foundGame) => {
+      res.redirect("/tools/admin-tools");
     })
     .catch((err) => {
       console.log(err);

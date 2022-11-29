@@ -1,0 +1,64 @@
+<div class="tools-rightbox">
+  <div>
+    <button class="createbtn" style="display: none;">create</button>
+  </div>
+  <div class="create-Screen">
+
+    <h2>edit game</h2>
+    <form action="/game/{{title}}/editgame" method="POST">
+      <div>
+        <label>Title
+          <input type="text" name="title" value="{{title}}" />
+        </label>
+      </div>
+      <div>
+        <label>
+          gitPage link
+          <input type="url" name="gitPage" value="{{gitPage}}" />
+        </label>
+      </div>
+      <div>
+        <label>
+          gitRep link
+          <input type="url" name="gitRep" value="{{gitRep}}" />
+        </label>
+      </div>
+      <div>
+        <label>
+          description
+          <input
+            class="descriptions"
+            type="text"
+            name="description"
+            value="{{description}}"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          tech description
+          <input
+            type="text"
+            name="techDescription"
+            value="{{techDescription}}"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          image!
+          <input type="url" name="imageUrl" placeholder="not working yet" />
+        </label>
+      </div>
+      <br />
+      <div><button class="submitbuttons" type="submit">Update Game</button></div>
+    </form>
+    <div class="validationErrors">
+      {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+      {{/if}}
+    </div>
+
+  </div>
+
+</div>

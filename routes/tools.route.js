@@ -8,7 +8,7 @@ const Review = require("../models/review.model");
 
 router.get("/creator-tools", isLoggedIn, (req, res, next) => {
   Game.find({ owner: req.session.currentUser._id })
-    .populate('owner')
+    .populate("owner")
     .then((myGames) => {
       console.log(myGames);
       res.render("tools/creator-tools", {
@@ -19,7 +19,15 @@ router.get("/creator-tools", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/admin-tools", isLoggedIn, (req, res, next) => {
-  res.render("tools/admin-tools", { userInSession: req.session.currentUser });
+   Game.find()
+     .populate("owner")
+     .then((myGames) => {
+       console.log(myGames);
+       res.render("tools/admin-tools", {
+         userInSession: req.session.currentUser,
+         myGames,
+       });
+     });
 });
 
 module.exports = router;
