@@ -13,21 +13,28 @@ const Game = require("../models/game.model");
 
 router.post("/creategame", isLoggedIn, (req, res, next) => {
   if (!req.body.title || !req.body.description || !req.body.gitPage) {
-    if (req.session.currentUser.admin) {
-      res.render("tools/admin-tools", {
-        errorMessage:
-          "Posts must have a minimum of Title, description, and gitPage",
-        userInSession: req.session.currentUser,
+    //find
+    Game.find({ owner: req.session.currentUser._id })
+      .populate("owner")
+      .then((myGames) => {
+        if (req.session.currentUser.admin) {
+          res.render("tools/admin-tools", {
+            errorMessage:
+              "Posts must have a minimum of Title, description, and gitPage",
+            userInSession: req.session.currentUser,
+            myGames,
+          });
+        } else {
+          res.render("tools/creator-tools", {
+            errorMessage:
+              "Posts must have a minimum of Title, description, and gitPage",
+            userInSession: req.session.currentUser,
+            myGames,
+          });
+        }
+        return;
       });
-      return;
-    } else {
-      res.render("tools/creator-tools", {
-        errorMessage:
-          "Posts must have a minimum of Title, description, and gitPage",
-        userInSession: req.session.currentUser,
-      });
-      return;
-    }
+    return;
   }
   Game.findOne({ title: req.body.title })
     .then(() => {
@@ -55,32 +62,60 @@ router.post("/creategame", isLoggedIn, (req, res, next) => {
     }) //fix username repeat error
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        if (req.session.currentUser.admin) {
-          res.status(500).render("tools/admin-tools", {
-            errorMessage: err.message,
-            userInSession: req.session.currentUser,
+        //find
+        Game.find({ owner: req.session.currentUser._id })
+          .populate("owner")
+          .then((myGames) => {
+            if (req.session.currentUser.admin) {
+              res.status(500).render("tools/admin-tools", {
+                errorMessage: err.message,
+                userInSession: req.session.currentUser,
+                myGames,
+              });
+            } else {
+              res.status(500).render("tools/creator-tools", {
+                errorMessage: err.message,
+                userInSession: req.session.currentUser,
+                myGames,
+              });
+            }
           });
-        } else {
-          res.status(500).render("tools/creator-tools", {
-            errorMessage: err.message,
-            userInSession: req.session.currentUser,
-          });
-        }
+        return;
       } else if (err.code === 11000) {
-        if (req.session.currentUser.admin) {
-          res.status(500).render("tools/admin-tools", {
-            errorMessage: "title needs to be unique. title is already used.",
-            userInSession: req.session.currentUser,
+        Game.find({ owner: req.session.currentUser._id })
+          .populate("owner")
+          .then((myGames) => {
+            if (req.session.currentUser.admin) {
+              res.status(500).render("tools/admin-tools", {
+                errorMessage:
+                  "title needs to be unique. title is already used.",
+                userInSession: req.session.currentUser,
+                myGames,
+              });
+            } else {
+              res.status(500).render("tools/creator-tools", {
+                errorMessage:
+                  "title needs to be unique. title is already used.",
+                userInSession: req.session.currentUser,
+                myGames,
+              });
+            }
           });
-        } else {
-          res.status(500).render("tools/creator-tools", {
-            errorMessage: "title needs to be unique. title is already used.",
-            userInSession: req.session.currentUser,
-          });
-        }
+        return;
       } else {
         next(err);
       }
+    });
+});
+
+router.post("/:id/delete", (req, res, next) => {
+  console.log(req.params.id, "PARAMS NAME");
+  Game.findByIdAndDelete(req.params.id)
+    .then((foundGame) => {
+      res.redirect("/tools/creator-tools");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 

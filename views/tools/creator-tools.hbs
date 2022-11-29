@@ -1,12 +1,12 @@
 <div class="tools">
   <div class="tools-leftbox">
     <div class="tools-order">
-      <div>my games</div>
-      <div>pending</div>
+      <button id="creatorpendingbtn" class="createbtn">pending</button>
+      <button id="creatorapprovedbtn" class="createbtn">approved</button>
     </div>
     <div class="tools-gamelistbox">
       <div class="tools-gamelist">
-        <div class="pending-games">
+        <div class="pending-games" style="display: none;">
         </div>
         <div class="posted-games">
           {{#each myGames}}
@@ -18,22 +18,12 @@
                 {{!-- <img src="{{imageUrl}}" alt="" /> --}}
                 <a target="_blank" href="{{gitPage}}"> Gamelink</a>
                 <br />
-                <a target="_blank" href="{{gitRep   }}"> rep link</a>
+                <a target="_blank" href="{{gitRep}}"> rep link</a>
               </div>
               <div>
-                {{#if isMyGame}}
-                  {{!-- <form action="/rooms/{{name}}/delete" method="post">
-                    <button type="submit"> delete</button>
-
-                  </form>
-                  <form action="/rooms/{{name}}/editroom" method="get">
-                    <button type="submit"> edit</button>
-                  </form> --}}
-                {{else}}
-                  {{!-- <form action="/review/add-review/{{name}}">
-                    <button>Add Review</button>
-                  </form> --}}
-                {{/if}}
+                <form action="/game/{{_id}}/delete" method="post">
+                  <button type="submit"> delete</button>
+                </form>
               </div>
             </div>
           {{/each}}
@@ -43,71 +33,74 @@
   </div>
   <div class="tools-rightbox">
     <div>
-      <button class="editcreatebtn">edit</button>
+      <button class="createbtn" style="display: none;">create</button>
     </div>
-    <div>
-      <h2>create game</h2>
-      <form action="/game/creategame" method="POST">
-        <div>
-          <label>Title
-            <input type="text" name="title" placeholder="ironGame" />
-          </label>
+    <div class="create-Screen">
+      <div>
+        <h2>create game</h2>
+        <form action="/game/creategame" method="POST">
+          <div>
+            <label>Title
+              <input type="text" name="title" placeholder="ironGame" />
+            </label>
+          </div>
+          <div>
+            <label>
+              gitPage link
+              <input
+                type="url"
+                name="gitPage"
+                placeholder="https://jpschnabel117.github.io/Game-Project-DDR/"
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              gitRep link
+              <input
+                type="url"
+                name="gitRep"
+                placeholder="https://github.com/Jpschnabel117/Game-Project-DDR"
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              description
+              <input
+                type="text"
+                name="description"
+                placeholder="game about jumping"
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              tech description
+              <input
+                type="text"
+                name="techDescription"
+                placeholder="i used Javascript canvas"
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              image!
+              <input type="url" name="imageUrl" placeholder="not working yet" />
+            </label>
+          </div>
+          <br />
+          <div><button class="submitbuttons" type="submit">Submit Game</button></div>
+        </form>
+        <div class="validationErrors">
+          {{#if errorMessage}}
+            <p class="error">{{errorMessage}}</p>
+          {{/if}}
         </div>
-        <div>
-          <label>
-            gitPage link
-            <input
-              type="url"
-              name="gitPage"
-              placeholder="https://jpschnabel117.github.io/Game-Project-DDR/"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            gitRep link
-            <input
-              type="url"
-              name="gitRep"
-              placeholder="https://github.com/Jpschnabel117/Game-Project-DDR"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            description
-            <input
-              type="text"
-              name="description"
-              placeholder="game about jumping"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            tech description
-            <input
-              type="text"
-              name="techDescription"
-              placeholder="i used Javascript canvas"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            image!
-            <input type="url" name="imageUrl" placeholder="not working yet" />
-          </label>
-        </div>
-        <br />
-        <div><button class="submitbuttons" type="submit">Submit Game</button></div>
-      </form>
-      <div class="validationErrors">
-        {{#if errorMessage}}
-          <p class="error">{{errorMessage}}</p>
-        {{/if}}
       </div>
     </div>
+
   </div>
 </div>
 <script src="/javascripts/tools/creator-tools.js"></script>

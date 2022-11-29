@@ -24,21 +24,25 @@ nav {
   background-color: beige;
   height: 95%;
 }
-
+/*  */
 .tools-leftbox {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 45%;
   height: 80%;
   background-color: blue;
+  border-radius: 2%;
 }
 
 .tools-rightbox {
   display: flex;
+  align-items: center;
   flex-direction: column;
   width: 45%;
   height: 80%;
   background-color: aqua;
+  border-radius: 2%;
 }
 
 .tools-gamelist {
@@ -49,6 +53,7 @@ nav {
   width: 95%;
   height: 95%;
   background-color: blueviolet;
+  overflow-y: scroll;
 }
 .tools-gamelistbox {
   display: flex;
@@ -63,6 +68,7 @@ nav {
 .tools-order {
   display: flex;
   justify-content: space-evenly;
+  width: 50%;
   background-color: red;
 }
 .tools-order > div {
@@ -71,12 +77,22 @@ nav {
 
 .posted-games {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 95%;
 }
 
 .listedGame {
   background-color: #00b7ff;
+  margin-top: 5%;
   border-radius: 5px;
   width: 95%;
+}
+/*  */
+
+.create-Screen {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
