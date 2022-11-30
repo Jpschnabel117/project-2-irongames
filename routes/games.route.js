@@ -131,6 +131,10 @@ router.get("/:title/editgame", (req, res, next) => {
 });
 
 router.post("/:title/editgame", (req, res, next) => {
+  let img = "";
+  if (req.file !== undefined) {
+    img = req.file.path;
+  }
   Game.findOneAndUpdate(
     { title: req.params.title },
     {
@@ -140,7 +144,7 @@ router.post("/:title/editgame", (req, res, next) => {
       gitRep: req.body.gitRep,
       description: req.body.description,
       techDescription: req.body.techDescription,
-      imageUrl: req.body.imageUrl,
+      imageUrl: img,
     },
     { new: true }
   )
