@@ -17,6 +17,7 @@ const userSchema = new Schema(
     ownedGames: [],
     approvedGames: [],
     pendingGames: [],
+    gamesRated: [],
     favorites: [],
     admin: Boolean,
   },

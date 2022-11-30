@@ -4,6 +4,7 @@
       <div class="mainlistedGame">
         <img class="gameImg" src="{{imageUrl}}" alt="no img" />
         <h3>title: {{title}}</h3>
+        <span> {{rating}}</span>
         <p>Creator: {{owner.username}}</p>
         <p>Description: {{description}}</p>
         {{!-- <img src="{{imageUrl}}" alt="" /> --}}
@@ -11,7 +12,7 @@
         <br />
         <a target="_blank" href="{{gitRep}}"> rep link</a>
         <br />
-        <span>Status: [Approved]</span>
+        <a class="detailsLink" href="/game/{{title}}/gameDetails"> Details</a>
       </div>
     {{/if}}
   {{/each}}

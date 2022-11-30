@@ -1,0 +1,41 @@
+<div>
+  <div class="imgDiv">
+    <img class="imgdetails" src="{{foundGame.imageUrl}}" alt="missing img" />
+    <div>imageUrl: {{imageUrl}}</div>
+  </div>
+  <div class="details">
+    <h1>{{foundGame.title}}</h1>
+    <span><h3>created by: {{foundGame.owner.username}}</h3></span>
+    <div>{{foundGame.description}}</div>
+    <div>technical description: {{foundGame.techDescription}}</div>
+    <div>Rating: {{foundGame.rating}}</div>
+    <div class="reviewsDiv">
+      <form action="/game/{{foundGame.title}}/reviewGame" method="POST">
+        <label>
+          Add a review!:
+          <input type="text" name="comment" />
+          rate the game:
+          <input type="number" name="score" placeholder="1-10" />
+          <input
+            type="text"
+            name="foundGame"
+            value="{{foundGame}}"
+            style="display: none;"
+          />
+        </label>
+        <div><button class="submitbuttons" type="submit">Submit Review and a
+            rating</button></div>
+      </form>
+      <div class="validationErrors">
+        {{#if errorMessage}}
+          <p class="error">{{errorMessage}}</p>
+        {{/if}}
+      </div>
+      {{#each foundGame.reviews}}
+        <div>{{this.rating}}</div>
+        <div>{{this.user.username}}</div>
+        <div>{{this.comment}}</div>
+      {{/each}}
+    </div>
+  </div>
+</div>

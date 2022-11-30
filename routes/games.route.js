@@ -10,6 +10,8 @@ const {
   isOwner,
 } = require("../middlewares/auth.middlewares");
 const Game = require("../models/game.model");
+const Review = require("../models/review.model");
+const { update } = require("../models/user.model");
 
 router.post(
   "/creategame",
@@ -40,13 +42,17 @@ router.post(
         });
       return;
     }
+    let img = "";
+    if (req.file !== undefined) {
+      img = req.file.path;
+    }
     Game.findOne({ title: req.body.title })
       .then(() => {
         return Game.create({
           title: req.body.title,
           description: req.body.description,
           techDescription: req.body.techDescription,
-          imageUrl: req.file.path,
+          imageUrl: img,
           gitPage: req.body.gitPage,
           gitRep: req.body.gitRep,
           pending: true,
@@ -127,7 +133,15 @@ router.get("/:title/editgame", (req, res, next) => {
 router.post("/:title/editgame", (req, res, next) => {
   Game.findOneAndUpdate(
     { title: req.params.title },
-    req.body /*the form stuff*/,
+    {
+      pending: true,
+      title: req.body.title,
+      gitPage: req.body.gitPage,
+      gitRep: req.body.gitRep,
+      description: req.body.description,
+      techDescription: req.body.techDescription,
+      imageUrl: req.body.imageUrl,
+    },
     { new: true }
   )
     .then((foundGame) => {
@@ -160,6 +174,82 @@ router.post("/:id/approvegame", (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.get("/:title/gameDetails", (req, res, next) => {
+  Game.find({ title: req.params.title })
+    .populate({ path: "reviews", populate: { path: "user" } })
+    .populate("owner")
+    .then((foundGame) => {
+      console.log(foundGame, "FOUND GAME");
+      res.render("game/game-details", {
+        foundGame: foundGame[0],
+        userInSession: req.session.currentUser,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.post("/:title/reviewGame", (req, res, next) => {
+  let notReviewed = true;
+  req.session.currentUser.gamesRated.forEach((game) => {
+    //review check
+    if (game === req.params.title) {
+      notReviewed = false;
+    }
+  });
+  if (notReviewed === true && req.body.score <= 10 && req.body.score > 0) {
+    Review.create({
+      user: req.session.currentUser._id,
+      comment: req.body.comment,
+    })
+      .then((newReview) => {
+        return Game.findOneAndUpdate(
+          { title: req.params.title },
+          { $addToSet: { reviews: newReview._id } },
+          { new: true }
+        );
+      })
+      .then((updatedGame) => {
+        //add to reviewed games
+        let total = 0;
+        updatedGame.reviews.forEach((element) => {
+          total = element.rating + total;
+        });
+        updatedGame.rating = Math.round(
+          ((total / updatedGame.reviews.length) * 10) / 10
+        ); // use .save somehow
+
+        req.session.currentUser.gamesRated.push(updatedGame.title);
+        res.redirect(`/game/${updatedGame.title}/gameDetails`);
+        console.log("with new review:", updatedGame);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    console.log("already reviewd");
+    Game.find({ title: req.params.title })
+      .populate({ path: "reviews", populate: { path: "user" } })
+      .populate("owner")
+      .then((foundGame) => {
+        let message = "Your score should be 1-10";
+        if (notReviewed === false) {
+          message = "youve already reviewed this game";
+        }
+        console.log(foundGame, "FOUND GAME");
+        res.render("game/game-details", {
+          foundGame: foundGame[0],
+          userInSession: req.session.currentUser,
+          errorMessage: message,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 });
 
 module.exports = router;
