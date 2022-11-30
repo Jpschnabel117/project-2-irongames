@@ -7,6 +7,8 @@ const app = express();
 require("./config/session.config")(app);
 require("dotenv/config");
 
+app.set('trust proxy', 1)
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 

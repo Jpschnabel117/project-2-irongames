@@ -5,7 +5,11 @@
   <div class="create-Screen">
 
     <h2>edit game</h2>
-    <form action="/game/{{title}}/editgame" method="POST">
+    <form
+      action="/game/{{title}}/editgame"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       <div>
         <label>Title
           <input type="text" name="title" value="{{title}}" />
@@ -47,7 +51,8 @@
       <div>
         <label>
           image!
-          <input type="url" name="imageUrl" value="{{imageUrl}}" />
+          <input type="file" name="gameImgFile" />
+          {{! <input type="url" name="imageUrl" placeholder="not working yet" /> }}
         </label>
       </div>
       <br />

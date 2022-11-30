@@ -73,7 +73,11 @@
     <div class="create-Screen">
 
       <h2>create game</h2>
-      <form action="/game/creategame" method="POST">
+      <form
+        action="/game/creategame"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <div>
           <label>Title
             <input type="text" name="title" placeholder="ironGame" />
@@ -123,7 +127,8 @@
         <div>
           <label>
             image!
-            <input type="url" name="imageUrl" placeholder="not working yet" />
+            <input type="file" name="gameImgFile" />
+            {{! <input type="url" name="imageUrl" placeholder="not working yet" /> }}
           </label>
         </div>
         <br />
