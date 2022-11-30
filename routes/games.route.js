@@ -203,6 +203,7 @@ router.post("/:title/reviewGame", (req, res, next) => {
   if (notReviewed === true && req.body.score <= 10 && req.body.score > 0) {
     Review.create({
       user: req.session.currentUser._id,
+      rating: req.body.score,
       comment: req.body.comment,
     })
       .then((newReview) => {
@@ -210,21 +211,26 @@ router.post("/:title/reviewGame", (req, res, next) => {
           { title: req.params.title },
           { $addToSet: { reviews: newReview._id } },
           { new: true }
-        );
+        ).populate("reviews");
       })
       .then((updatedGame) => {
         //add to reviewed games
-        let total = 0;
-        updatedGame.reviews.forEach((element) => {
-          total = element.rating + total;
-        });
-        updatedGame.rating = Math.round(
-          ((total / updatedGame.reviews.length) * 10) / 10
-        ); // use .save somehow
-
         req.session.currentUser.gamesRated.push(updatedGame.title);
-        res.redirect(`/game/${updatedGame.title}/gameDetails`);
-        console.log("with new review:", updatedGame);
+
+        let total = 0;
+        console.log("sadasda", updatedGame.reviews);
+        updatedGame.reviews.forEach((element) => {
+          total = Number(element.rating) + total;
+        });
+        console.log(total);
+        let average = Math.round(
+          ((total / updatedGame.reviews.length) * 10) / 10
+        );
+
+        updatedGame.rating = Number(average); // use .save somehow
+        updatedGame.save().then(() => {
+          res.redirect(`/game/${updatedGame.title}/gameDetails`);
+        });
       })
       .catch((err) => {
         console.log(err);
