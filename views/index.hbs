@@ -3,11 +3,13 @@
     {{#if pending}}{{else}}
       <div class="mainlistedGame">
         <div>
-          <img class="gameImg" src="{{imageUrl}}" alt="no img" />
-        </div>
-        <div>
-          <h3>{{title}}</h3>
-          <p>{{description}}</p>
+          <div>
+            <img class="gameImg" src="{{imageUrl}}" alt="no img" />
+          </div>
+          <div>
+            <h3>{{title}}</h3>
+            <p style="overflow-y: scroll; height: 100px">{{description}}</p>
+          </div>
           <div class="mainCardLinkLine">
             <a class="link-buttons" target="_blank" href="{{gitPage}}">Play</a>
             <a class="link-buttons" target="_blank" href="{{gitRep}}">Code</a>
@@ -17,8 +19,7 @@
               href="/game/{{title}}/gameDetails"
             >Details</a>
             <span class="rating">{{rating}}</span>
-          </div>
-        </div>
+          </div></div>
       </div>
     {{/if}}
   {{/each}}
