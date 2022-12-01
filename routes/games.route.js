@@ -134,10 +134,17 @@ router.post(
   "/:title/editgame",
   fileUploader.single("gameImgFile"),
   (req, res, next) => {
-    // let img = "";
-    // if (req.file !== undefined) {
-    //   img = req.file.path;
-    // }
+    if (!req.body.title || !req.body.description || !req.body.gitPage) {
+      Game.find({ title: req.params.title })
+        .then((foundGame) => {
+          console.log(foundGame, "FOUND GAME");
+          res.render("game/game-edit", foundGame[0]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return;
+    }
     Game.findOneAndUpdate(
       { title: req.params.title },
       {

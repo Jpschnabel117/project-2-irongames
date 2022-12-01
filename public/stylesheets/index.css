@@ -13,6 +13,30 @@ nav > div {
   align-items: center;
 }
 .Nav-link-buttons {
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+  outline: 0;
+  cursor: pointer;
+  padding: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 6px;
+  color: #24292e;
+  background-color: #fafbfc;
+  border-color: #1b1f2326;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px,
+    rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+}
+.Nav-link-buttons:hover {
+  transform: translateY(-2px);
+  transition: all 0.1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #3a4149;
 }
 
 .link-buttons {
@@ -54,12 +78,37 @@ body {
 }
 .validationErrors {
   width: 300px;
-  padding: 5px;
+  font-size: small;
+  padding: 1px;
   border-radius: 5px;
   color: white;
   text-align: center;
   background-color: red;
 }
+.txtinput {
+  background-color: rgb(250, 251, 252);
+  border-color: rgb(223, 225, 230);
+  color: rgb(9, 30, 66);
+  cursor: text;
+  border-radius: 3px;
+  border-width: 2px;
+  border-style: solid;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out 0s,
+    border-color 0.2s ease-in-out 0s;
+  line-height: 1.42857;
+  padding: 8px 6px;
+  height: 36px;
+}
+.txtinput:hover {
+  background-color: rgb(235, 236, 240);
+}
+.txtinput:focus {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(76, 154, 255);
+}
+
 .submitbuttons {
   display: inline-block;
   outline: 0;
@@ -78,6 +127,8 @@ body {
     rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
   transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
   transition-property: color, background-color, border-color;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .submitbuttons:hover {
   background-color: #2c974b;
@@ -89,51 +140,112 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: beige;
   height: 95%;
 }
 /*  */
 .tools-leftbox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: inline-block;
+  justify-content: center;
+  outline: 0;
+  border: 0;
+  margin: 10px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  will-change: box-shadow, transform;
+  background: #fcfcfd;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
   width: 45%;
+  padding: 10px;
   height: 80%;
-  background-color: blue;
-  border-radius: 2%;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #36395a;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .tools-rightbox {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  margin: 10px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  will-change: box-shadow, transform;
+  background: #fcfcfd;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
   width: 45%;
+  padding: 10px;
   height: 80%;
-  background-color: aqua;
-  border-radius: 2%;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #36395a;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .tools-gamelist {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-content: center;
   justify-content: flex-start;
   width: 95%;
-  height: 95%;
-
+  height: 93%;
+  margin-right: 0%;
   overflow-y: scroll;
 }
 
 .tools-order {
   display: flex;
-  justify-content: space-evenly;
-  width: 50%;
+  flex-direction: row;
+  justify-content: center;
 }
-.tools-order > div {
-  background-color: white;
+.createbtnleft {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 3px 0px 0px 3px;
+  padding: 12px 24px;
+  border: 0;
+  color: #3a4149;
+  background: #e7ebee;
+  line-height: 1.15;
+  font-size: 16px;
+}
+.createbtnleft:hover {
+  transform: translateY(-2px);
+  transition: all 0.1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #3a4149;
+}
+.createbtnleft:active {
+  box-shadow: inset 0px 3px 7px #d6d6e7;
+  transform: translateY(2px);
+}
+
+.createbtnright {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 0 3px 3px 0;
+  padding: 12px 24px;
+  border: 0;
+  color: #3a4149;
+  background: #e7ebee;
+  line-height: 1.15;
+  font-size: 16px;
+}
+.createbtnright:hover {
+  transform: translateY(-2px);
+  transition: all 0.1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #3a4149;
+}
+.createbtnright:active {
+  box-shadow: inset 0px 3px 7px #d6d6e7;
+  transform: translateY(2px);
 }
 
 .posted-games {
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -141,26 +253,46 @@ body {
 }
 
 .pending-games {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 95%;
 }
 
 .listedGame {
-  background-color: #00b7ff;
-  margin-top: 5%;
-  padding-left: 5%;
-  border-radius: 5px;
-  width: 95%;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  margin: 10px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  will-change: box-shadow, transform;
+  background: #fcfcfd;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
+  width: 90%;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #36395a;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.listedGame:hover {
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
+  transform: translateY(-2px);
 }
 /*  */
-
+.inputlabels {
+  margin-bottom: 5px;
+}
 .create-Screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
+  justify-content: center;
+  margin-top: -30px;
 }
 .descriptions {
 }
@@ -193,14 +325,21 @@ body {
     0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
   transform: translateY(-2px);
 }
-/* .mainlistedGame:active {
-  box-shadow: inset 0px 3px 7px #d6d6e7;
-  transform: translateY(2px);
-} */
+form {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: #30363d;
+}
+.link-buttons > a:hover {
+  color: white;
+}
 
 .mainCardLinkLine {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .editdeletebtn {
@@ -213,10 +352,12 @@ body {
   margin: -10px;
   border-radius: 6px 6px 0px 0px;
 }
-.imgDiv {
+.gameImg2 {
   width: 270px;
   height: 140px;
+  border-radius: 6px;
 }
+
 .imgdetails {
   width: 250px;
   height: 130px;

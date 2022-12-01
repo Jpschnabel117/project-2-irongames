@@ -31,24 +31,28 @@
             >{{userInSession.username}}</a>
           </div>
           <div>
-            <a class="logout-buttons" href="/auth/logout"> Logout </a>
+            <a class="Nav-link-buttons" href="/auth/logout">Logout</a>
           </div>
         {{else if userInSession}}
-          <div class="link-buttons">
-            <a href="/tools/creator-tools"> creator tools | </a>
+          <div>
+            <a class="Nav-link-buttons" href="/tools/creator-tools">creator
+              tools</a>
           </div>
-          <div class="link-buttons">
-            <a href="/auth/userProfile">{{userInSession.username}} | </a>
+          <div>
+            <a
+              class="Nav-link-buttons"
+              href="/auth/userProfile"
+            >{{userInSession.username}}</a>
           </div>
-          <div class="link-buttons">
-            <a href="/auth/logout"> Logout | </a>
+          <div>
+            <a class="Nav-link-buttons" href="/auth/logout"> Logout</a>
           </div>
         {{else}}
-          <div class="link-buttons">
-            <a href="/auth/signup">Sign Up | </a>
+          <div>
+            <a class="Nav-link-buttons" href="/auth/signup">Sign Up</a>
           </div>
-          <div class="link-buttons">
-            <a href="/auth/login">Log In | </a>
+          <div>
+            <a class="Nav-link-buttons" href="/auth/login">Log In</a>
           </div>
         {{/if}}
       </div>

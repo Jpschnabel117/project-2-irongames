@@ -1,34 +1,45 @@
 <div class="tools">
   <div class="tools-leftbox">
     <div class="tools-order">
-      <button class="creatorpendingbtn" class="createbtn">pending</button>
-      <button class="creatorapprovedbtn" class="createbtn">approved</button>
+      <button class="createbtnleft">pending</button>
+      <button class="createbtnright">approved</button>
     </div>
     <div class="tools-gamelist">
       <div class="pending-games">
         {{#each myGames}}
           {{#if this.pending}}
-            <div class="listedGame">
+            <div class="mainlistedGame">
               <div>
-                <img class="gameImg" src="{{imageUrl}}" alt="" />
-                <h3>title: {{title}}</h3>
-                <p>Creator: {{owner.username}}</p>
-                <p>Description: {{description}}</p>
-                {{!-- <img src="{{imageUrl}}" alt="" /> --}}
-                <a target="_blank" href="{{gitPage}}"> Gamelink</a>
-                <br />
-                <a target="_blank" href="{{gitRep}}"> rep link</a>
-                <br />
+                <img class="gameImg" src="{{imageUrl}}" alt="no img" />
+              </div>
+              <div>
+                <h3>{{title}}</h3>
+                <p>{{description}}</p>
+                <div class="mainCardLinkLine">
+                  <div class="link-buttons">
+                    <a target="_blank" href="{{gitPage}}">Play</a>
+                  </div>
+                  <div class="link-buttons">
+                    <a target="_blank" href="{{gitRep}}">Code</a>
+                  </div>
+                  <form action="/game/{{title}}/gameDetails" method="get">
+                    <button class="link-buttons" type="submit">
+                      Details</button>
+                  </form>
+                  <form action="/game/{{title}}/editgame" method="get">
+                    <button class="link-buttons" type="submit">
+                      Edit</button>
+                  </form>
+                  <form action="/game/{{_id}}/delete" method="post">
+                    <button class="link-buttons" type="submit">
+                      Delete</button>
+                  </form>
+                  <div class="rating"><span>{{rating}}</span></div>
+
+                </div>
                 <span>Status: [Pending]</span>
               </div>
-              <div class="editdeletebtn">
-                <form action="/game/{{_id}}/delete" method="post">
-                  <button type="submit"> delete</button>
-                </form>
-                <form action="/game/{{title}}/editgame" method="get">
-                  <button type="submit"> edit</button>
-                </form>
-              </div>
+
             </div>
           {{/if}}
         {{/each}}
@@ -36,27 +47,38 @@
       <div class="posted-games">
         {{#each myGames}}
           {{#if pending}}{{else}}
-            <div class="listedGame">
+            <div class="mainlistedGame">
               <div>
-                <img class="gameImg" src="{{imageUrl}}" alt="" />
-                <h3>title: {{title}}</h3>
-                <p>Creator: {{owner.username}}</p>
-                <p>Description: {{description}}</p>
-                {{!-- <img src="{{imageUrl}}" alt="" /> --}}
-                <a target="_blank" href="{{gitPage}}"> Gamelink</a>
-                <br />
-                <a target="_blank" href="{{gitRep}}"> rep link</a>
-                <br />
+                <img class="gameImg" src="{{imageUrl}}" alt="no img" />
+              </div>
+              <div>
+                <h3>{{title}}</h3>
+                <p>{{description}}</p>
+                <div class="mainCardLinkLine">
+                  <div class="link-buttons">
+                    <a target="_blank" href="{{gitPage}}">Play</a>
+                  </div>
+                  <div class="link-buttons">
+                    <a target="_blank" href="{{gitRep}}">Code</a>
+                  </div>
+                  <form action="/game/{{title}}/gameDetails" method="get">
+                    <button class="link-buttons" type="submit">
+                      Details</button>
+                  </form>
+                  <form action="/game/{{title}}/editgame" method="get">
+                    <button class="link-buttons" type="submit">
+                      Edit</button>
+                  </form>
+                  <form action="/game/{{_id}}/delete" method="post">
+                    <button class="link-buttons" type="submit">
+                      Delete</button>
+                  </form>
+                  <div class="rating"><span>{{rating}}</span></div>
+
+                </div>
                 <span>Status: [Approved]</span>
               </div>
-              <div class="editdeletebtn">
-                <form action="/game/{{_id}}/delete" method="post">
-                  <button type="submit"> delete</button>
-                </form>
-                <form action="/game/{{title}}/editgame" method="get">
-                  <button type="submit"> edit</button>
-                </form>
-              </div>
+
             </div>
           {{/if}}
         {{/each}}
@@ -64,81 +86,87 @@
     </div>
   </div>
   <div class="tools-rightbox">
-    <div>
-      <button class="createbtn" style="display: none;">create</button>
-    </div>
     <div class="create-Screen">
 
       <h2>create game</h2>
       <form
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center;"
         action="/game/creategame"
         method="POST"
         enctype="multipart/form-data"
       >
-        <div>
-          <label>Title
-            <input type="text" name="title" placeholder="ironGame" />
-          </label>
-        </div>
-        <div>
-          <label>
-            gitPage link
+        <div
+          style="display: flex; flex-direction: column; justify-content:center; align-items:center"
+        >
+          <div class="inputlabels">
+            <label>Title</label><br />
             <input
+              class="txtinput"
+              type="text"
+              name="title"
+              placeholder="ironGame"
+            />
+
+          </div>
+          <div class="inputlabels">
+            <label>
+              gitPage link</label><br />
+            <input
+              class="txtinput"
               type="url"
               name="gitPage"
               placeholder="https://jpschnabel117.github.io/Game-Project-DDR/"
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            gitRep link
+
+          </div>
+          <div class="inputlabels">
+            <label>
+              gitRep link</label><br />
             <input
+              class="txtinput"
               type="url"
               name="gitRep"
               placeholder="https://github.com/Jpschnabel117/Game-Project-DDR"
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            description
+
+          </div>
+          <div class="inputlabels">
+            <label>
+              description</label><br />
             <input
-              class="descriptions"
+              class="descriptions txtinput"
               type="text"
               name="description"
               placeholder="game about jumping"
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            tech description
+
+          </div>
+          <div class="inputlabels">
+            <label>
+              tech description</label>
+            <br />
             <input
+              class="txtinput"
               type="text"
               name="techDescription"
               placeholder="i used Javascript canvas"
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            image!
+          </div>
+          <div class="inputlabels">
+            <label>
+              image!</label>
+            <br />
             <input type="file" name="gameImgFile" />
-          </label>
+          </div>
         </div>
-        <br />
-        <div></div>
         <div><button class="submitbuttons" type="submit">Submit Game</button></div>
       </form>
-      <div class="validationErrors">
-        {{#if errorMessage}}
-          <p class="error">{{errorMessage}}</p>
-        {{/if}}
-      </div>
-
+      {{#if errorMessage}}
+        <div class="validationErrors"><p
+            class="error"
+          >{{errorMessage}}</p></div>
+      {{/if}}
     </div>
-
   </div>
 </div>
 <script src="/javascripts/tools/creator-tools.js"></script>

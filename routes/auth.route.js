@@ -3,7 +3,12 @@ const router = require("express").Router();
 const bcryptjs = require("bcryptjs");
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
-const { isAnon, isLoggedIn, isNotOwner,isOwner } = require("../middlewares/auth.middlewares");
+const {
+  isAnon,
+  isLoggedIn,
+  isNotOwner,
+  isOwner,
+} = require("../middlewares/auth.middlewares");
 const saltRounds = 8;
 
 router.get("/signup", isAnon, (req, res, next) => {
@@ -95,7 +100,7 @@ router.post("/login", isAnon, (req, res, next) => {
       } else if (bcryptjs.compareSync(req.body.password, founduser.password)) {
         console.log("correct PW");
         req.session.currentUser = founduser;
-        res.redirect("/auth/userProfile");
+        res.redirect("/");
       } else {
         res.status(500).render("auth/login", {
           errorMessage: "incorrect password",

@@ -2,12 +2,11 @@
   {{#each allGames}}
     {{#if pending}}{{else}}
       <div class="mainlistedGame">
-        <div class="imgDiv">
+        <div>
           <img class="gameImg" src="{{imageUrl}}" alt="no img" />
         </div>
         <div>
           <h3>{{title}}</h3>
-          {{!-- <p>Creator: {{owner.username}}</p> --}}
           <p>{{description}}</p>
           <div class="mainCardLinkLine">
             <a class="link-buttons" target="_blank" href="{{gitPage}}">Play</a>
