@@ -5,7 +5,10 @@
   </div>
   <div class="details">
     <h1>{{foundGame.title}}</h1>
-    <span><h3>created by: {{foundGame.owner.username}}</h3></span>
+    <span><h3>created by:
+        {{foundGame.owner.username}}
+        <br /> submitted on: 
+        {{dateMade}}</h3></span>
     <div>{{foundGame.description}}</div>
     <div>technical description: {{foundGame.techDescription}}</div>
     <div>Rating: {{foundGame.rating}}</div>

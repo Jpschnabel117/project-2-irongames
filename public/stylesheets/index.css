@@ -1,6 +1,56 @@
 nav {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  background-color: #30363d;
+}
+
+nav > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+}
+.Nav-link-buttons {
+}
+
+.link-buttons {
+  text-decoration: none;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid #30363d;
+  color: #30363d;
+  background: 0 0;
+  padding: 8px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+  font-weight: 800;
+  font-size: 16px;
+  margin: 5px;
+}
+.link-buttons:hover {
+  background-color: #30363d;
+  color: #fff;
+}
+.link-buttons:active {
+  box-shadow: inset 0px 3px 7px #d6d6e7;
+  transform: translateY(2px);
+}
+
+.logout-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 .validationErrors {
   width: 300px;
@@ -11,10 +61,28 @@ nav {
   background-color: red;
 }
 .submitbuttons {
-  width: 310px;
-  background-color: #00b7ff;
-  border-radius: 5px;
-  border-color: #00b7ff;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 6px;
+  color: #ffffff;
+  background-color: #2ea44f;
+  border-color: #1b1f2326;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px,
+    rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+}
+.submitbuttons:hover {
+  background-color: #2c974b;
+  border-color: #1b1f2326;
+  transition-duration: 0.1s;
 }
 
 .tools {
@@ -104,15 +172,35 @@ nav {
 }
 
 .mainlistedGame {
-  border-color: gray;
-  border-radius: 15px;
-  border-style: outset;
-  border-width: 5px;
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  margin: 10px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  will-change: box-shadow, transform;
+  background: #fcfcfd;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
   width: 250px;
   padding: 10px;
-  margin: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #36395a;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.mainlistedGame:hover {
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #d6d6e7;
+  transform: translateY(-2px);
+}
+/* .mainlistedGame:active {
+  box-shadow: inset 0px 3px 7px #d6d6e7;
+  transform: translateY(2px);
+} */
+
+.mainCardLinkLine {
+  display: flex;
+  flex-direction: row;
 }
 
 .editdeletebtn {
@@ -120,5 +208,30 @@ nav {
 }
 
 .gameImg {
-  width: 100px;
+  width: 270px;
+  height: 140px;
+  margin: -10px;
+  border-radius: 6px 6px 0px 0px;
+}
+.imgDiv {
+  width: 270px;
+  height: 140px;
+}
+.imgdetails {
+  width: 250px;
+  height: 130px;
+}
+.rating {
+  display: inline-block;
+  outline: 0;
+  border-radius: 6px;
+  border: 2px solid #8b949e;
+  color: #8b949e;
+  background: 0 0;
+  padding: 8px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+  font-weight: 800;
+  font-size: 16px;
+  margin: 5px;
 }

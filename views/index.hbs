@@ -2,17 +2,24 @@
   {{#each allGames}}
     {{#if pending}}{{else}}
       <div class="mainlistedGame">
-        <img class="gameImg" src="{{imageUrl}}" alt="no img" />
-        <h3>title: {{title}}</h3>
-        <span> {{rating}}</span>
-        <p>Creator: {{owner.username}}</p>
-        <p>Description: {{description}}</p>
-        {{!-- <img src="{{imageUrl}}" alt="" /> --}}
-        <a target="_blank" href="{{gitPage}}"> Gamelink</a>
-        <br />
-        <a target="_blank" href="{{gitRep}}"> rep link</a>
-        <br />
-        <a class="detailsLink" href="/game/{{title}}/gameDetails"> Details</a>
+        <div class="imgDiv">
+          <img class="gameImg" src="{{imageUrl}}" alt="no img" />
+        </div>
+        <div>
+          <h3>{{title}}</h3>
+          {{!-- <p>Creator: {{owner.username}}</p> --}}
+          <p>{{description}}</p>
+          <div class="mainCardLinkLine">
+            <a class="link-buttons" target="_blank" href="{{gitPage}}">Play</a>
+            <a class="link-buttons" target="_blank" href="{{gitRep}}">Code</a>
+            <a
+              class="link-buttons"
+              target="_blank"
+              href="/game/{{title}}/gameDetails"
+            >Details</a>
+            <span class="rating">{{rating}}</span>
+          </div>
+        </div>
       </div>
     {{/if}}
   {{/each}}

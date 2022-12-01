@@ -42,17 +42,17 @@ router.post(
         });
       return;
     }
-    let img = "";
-    if (req.file !== undefined) {
-      img = req.file.path;
-    }
+    // let img = "";
+    // if (req.file !== undefined) {
+    //   img = req.file.path;
+    // }
     Game.findOne({ title: req.body.title })
       .then(() => {
         return Game.create({
           title: req.body.title,
           description: req.body.description,
           techDescription: req.body.techDescription,
-          imageUrl: img,
+          imageUrl: req.file?.path,
           gitPage: req.body.gitPage,
           gitRep: req.body.gitRep,
           pending: true,
@@ -130,33 +130,37 @@ router.get("/:title/editgame", (req, res, next) => {
     });
 });
 
-router.post("/:title/editgame", (req, res, next) => {
-  let img = "";
-  if (req.file !== undefined) {
-    img = req.file.path;
+router.post(
+  "/:title/editgame",
+  fileUploader.single("gameImgFile"),
+  (req, res, next) => {
+    // let img = "";
+    // if (req.file !== undefined) {
+    //   img = req.file.path;
+    // }
+    Game.findOneAndUpdate(
+      { title: req.params.title },
+      {
+        pending: true,
+        title: req.body.title,
+        gitPage: req.body.gitPage,
+        gitRep: req.body.gitRep,
+        description: req.body.description,
+        techDescription: req.body.techDescription,
+        imageUrl: req.file?.path,
+      },
+      { new: true }
+    )
+      .then((foundGame) => {
+        console.log(foundGame, "updated Game");
+        //add redirect for admin tools with admin check
+        res.redirect("/tools/creator-tools");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  Game.findOneAndUpdate(
-    { title: req.params.title },
-    {
-      pending: true,
-      title: req.body.title,
-      gitPage: req.body.gitPage,
-      gitRep: req.body.gitRep,
-      description: req.body.description,
-      techDescription: req.body.techDescription,
-      imageUrl: img,
-    },
-    { new: true }
-  )
-    .then((foundGame) => {
-      console.log(foundGame, "updated Game");
-      //add redirect for admin tools with admin check
-      res.redirect("/tools/creator-tools");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+);
 
 router.post("/:id/delete", (req, res, next) => {
   console.log(req.params.id, "PARAMS NAME");
@@ -185,10 +189,12 @@ router.get("/:title/gameDetails", (req, res, next) => {
     .populate({ path: "reviews", populate: { path: "user" } })
     .populate("owner")
     .then((foundGame) => {
+      let dateMADE = foundGame[0].createdAt.toString().substring(0, 10);
       console.log(foundGame, "FOUND GAME");
       res.render("game/game-details", {
         foundGame: foundGame[0],
         userInSession: req.session.currentUser,
+        dateMade: dateMADE,
       });
     })
     .catch((err) => {

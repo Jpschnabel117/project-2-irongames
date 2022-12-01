@@ -106,7 +106,7 @@ router.post("/login", isAnon, (req, res, next) => {
     .catch((err) => next(err));
 });
 
-router.post("/logout", (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
       next(err);
