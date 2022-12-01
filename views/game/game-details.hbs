@@ -1,13 +1,14 @@
 <div class="back">
   <div class="imgDiv">
     <img class="imgdetails" src="{{foundGame.imageUrl}}" alt="missing img" />
-    <div>imageUrl: {{imageUrl}}</div>
+    <div>{{imageUrl}}</div>
   </div>
   <div class="details">
     <h1>{{foundGame.title}}</h1>
     <span><h3>created by:
         {{foundGame.owner.username}}
-        <br /> submitted on: 
+        <br />
+        submitted on:
         {{dateMade}}</h3></span>
     <div>{{foundGame.description}}</div>
     <div>technical description: {{foundGame.techDescription}}</div>
@@ -16,9 +17,14 @@
       <form action="/game/{{foundGame.title}}/reviewGame" method="POST">
         <label>
           Add a review!:
-          <input type="text" name="comment" />
+          <input class="txtinput txtinputlong" type="text" name="comment" />
           rate the game:
-          <input type="text" name="score" placeholder="1-10" />
+          <input
+            class="txtinput txtinputshort"
+            type="text"
+            name="score"
+            placeholder="1-10"
+          />
           <input
             type="text"
             name="foundGame"
@@ -29,15 +35,21 @@
         <div><button class="submitbuttons" type="submit">Submit Review and a
             rating</button></div>
       </form>
-      <div class="validationErrors">
-        {{#if errorMessage}}
-          <p class="error">{{errorMessage}}</p>
-        {{/if}}
-      </div>
+      {{#if errorMessage}}
+        <div class="validationErrors"><p
+            class="error"
+          >{{errorMessage}}</p></div>
+      {{/if}}
       {{#each foundGame.reviews}}
-        <div>{{this.rating}}</div>
-        <div>{{this.user.username}}</div>
-        <div>{{this.comment}}</div>
+        <div class="review">
+          <div>
+            <div><h3>{{this.user.username}}</h3></div>
+            <div><p>{{this.comment}}</p></div>
+          </div>
+          <div style="display: flex; align-items: center;"><span
+              class="rating"
+            >{{this.rating}}</span></div>
+        </div>
       {{/each}}
     </div>
   </div>

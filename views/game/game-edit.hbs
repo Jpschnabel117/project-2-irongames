@@ -1,5 +1,74 @@
 <div class="back">
-  <div>
+  <div class="create-Screen">
+
+    <h2>create game</h2>
+    <form
+      style="display: flex; flex-direction: column; justify-content: center; align-items: center;"
+      action="/game/{{title}}/editgame"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div
+        style="display: flex; flex-direction: column; justify-content:center; align-items:center"
+      >
+        <div class="inputlabels">
+          <label>Title</label><br />
+          <input class="txtinput" type="text" name="title" value="{{title}}" />
+
+        </div>
+        <div class="inputlabels">
+          <label>
+            gitPage link</label><br />
+          <input
+            class="txtinput"
+            type="url"
+            name="gitPage"
+            value="{{gitPage}}"
+          />
+
+        </div>
+        <div class="inputlabels">
+          <label>
+            gitRep link</label><br />
+          <input class="txtinput" type="url" name="gitRep" value="{{gitRep}}" />
+
+        </div>
+        <div class="inputlabels">
+          <label>
+            description</label><br />
+          <input
+            class="descriptions txtinput txtinputlong"
+            type="text"
+            name="description"
+            value="{{description}}"
+          />
+
+        </div>
+        <div class="inputlabels">
+          <label>
+            tech description</label>
+          <br />
+          <input
+            class="txtinput txtinputlong"
+            type="text"
+            name="techDescription"
+            value="{{techDescription}}"
+          />
+        </div>
+        <div class="inputlabels">
+          <label>
+            image!</label>
+          <br />
+          <input type="file" name="gameImgFile" />
+        </div>
+      </div>
+      <div><button class="submitbuttons" type="submit">Submit Game</button></div>
+    </form>
+    {{#if errorMessage}}
+      <div class="validationErrors"><p class="error">{{errorMessage}}</p></div>
+    {{/if}}
+  </div>
+  {{!-- <div>
     <button class="createbtn" style="display: none;">create</button>
   </div>
   <div class="create-Screen">
@@ -62,6 +131,6 @@
       {{/if}}
     </div>
 
-  </div>
+  </div> --}}
 
 </div>
