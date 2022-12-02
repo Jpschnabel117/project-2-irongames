@@ -1,7 +1,7 @@
 <div class="back">
   <div class="create-Screen">
 
-    <h2>create game</h2>
+    <h2>Edit game</h2>
     <form
       style="display: flex; flex-direction: column; justify-content: center; align-items: center;"
       action="/game/{{title}}/editgame"
@@ -62,7 +62,7 @@
           <input type="file" name="gameImgFile" />
         </div>
       </div>
-      <div><button class="submitbuttons" type="submit">Submit Game</button></div>
+      <div><button class="submitbuttons" type="submit">Update Game</button></div>
     </form>
     {{#if errorMessage}}
       <div class="validationErrors"><p class="error">{{errorMessage}}</p></div>

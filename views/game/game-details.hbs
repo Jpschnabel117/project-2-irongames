@@ -14,27 +14,29 @@
     <div>technical description: {{foundGame.techDescription}}</div>
     <div>Rating: {{foundGame.rating}}</div>
     <div class="reviewsDiv">
-      <form action="/game/{{foundGame.title}}/reviewGame" method="POST">
-        <label>
-          Add a review!:
-          <input class="txtinput txtinputlong" type="text" name="comment" />
-          rate the game:
-          <input
-            class="txtinput txtinputshort"
-            type="text"
-            name="score"
-            placeholder="1-10"
-          />
-          <input
-            type="text"
-            name="foundGame"
-            value="{{foundGame}}"
-            style="display: none;"
-          />
-        </label>
-        <div><button class="submitbuttons" type="submit">Submit Review and a
-            rating</button></div>
-      </form>
+      {{#if userInSession}}
+        <form action="/game/{{foundGame.title}}/reviewGame" method="POST">
+          <label>
+            Add a review!:
+            <input class="txtinput txtinputlong" type="text" name="comment" />
+            rate the game:
+            <input
+              class="txtinput txtinputshort"
+              type="text"
+              name="score"
+              placeholder="1-10"
+            />
+            <input
+              type="text"
+              name="foundGame"
+              value="{{foundGame}}"
+              style="display: none;"
+            />
+          </label>
+          <div><button class="submitbuttons" type="submit">Submit Review and a
+              rating</button></div>
+        </form>
+      {{/if}}
       {{#if errorMessage}}
         <div class="validationErrors"><p
             class="error"
