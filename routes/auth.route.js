@@ -50,7 +50,7 @@ router.post("/signup", isAnon, (req, res, next) => {
     .then((createdUser) => {
       console.log("created user: ", createdUser);
       req.session.currentUser = createdUser;
-      res.redirect("/auth/userProfile");
+      res.redirect("/tools/creator-tools");
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {

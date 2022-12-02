@@ -1,28 +1,48 @@
-<div>
+<div
+  style="display: flex; flex-direction:column; justify-content:center; align-items:center"
+>
   <h2>Signup</h2>
-  <form action="/auth/signup" method="POST">
+  <form
+    style="display: flex; flex-direction:column; justify-content:center; align-items:center"
+    action="/auth/signup"
+    method="POST"
+  >
     <div>
-      <label>Email
-        <input type="text" name="email" placeholder="john.doe@gmail.com" />
-      </label>
+      <label>Email</label><br />
+      <input
+        class="txtinput"
+        type="text"
+        name="email"
+        placeholder="john.doe@gmail.com"
+      />
+
     </div>
     <div>
-      <label>Username
-        <input type="text" name="username" placeholder="ironhacker" />
-      </label>
+      <label>Username</label><br />
+      <input
+        class="txtinput"
+        type="text"
+        name="username"
+        placeholder="ironhacker"
+      />
+
     </div>
     <div>
       <label>
-        Password
-        <input type="password" name="password" placeholder="********" />
-      </label>
+        Password</label><br />
+      <input
+        class="txtinput"
+        type="password"
+        name="password"
+        placeholder="********"
+      />
+
     </div>
     <br />
     <button class="submitbuttons" type="submit">Create account</button>
   </form>
-  <div class="validationErrors">
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-  </div>
+  {{#if errorMessage}}
+    <div class="validationErrors"><p class="error">{{errorMessage}}</p></div>
+  {{/if}}
+  
 </div>
