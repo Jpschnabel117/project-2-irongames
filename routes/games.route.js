@@ -173,7 +173,11 @@ router.post("/:id/delete", (req, res, next) => {
   console.log(req.params.id, "PARAMS NAME");
   Game.findByIdAndDelete(req.params.id)
     .then((foundGame) => {
-      res.redirect("/tools/creator-tools");
+      if (req.session.currentUser.admin) {
+        res.redirect("/tools/admin-tools");
+      } else {
+        res.redirect("/tools/creator-tools");
+      }
     })
     .catch((err) => {
       console.log(err);
